@@ -1,0 +1,1 @@
+# This is a chat application built with Django, Channels and React
