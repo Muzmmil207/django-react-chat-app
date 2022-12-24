@@ -1,26 +1,39 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login } from "./components/Login";
-import { Chat } from "./components/Chat";
+// import { Login } from "./components/Login";
+// import { Chat } from "./components/Chat";
 import { Navbar } from "./components/Navbar";
-import { AuthContextProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
+import {HomePage} from './pages/HomePage';
+import {LoginPage} from './pages/LoginPage';
+// import {PrivateRoute} from './utils/PrivateRoute';
 
 export default function App() {
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <AuthContextProvider>
-              <Navbar />
-            </AuthContextProvider>
-          }
-        >
-          <Route path="" element={<Chat />} />
-          <Route path="login" element={<Login />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <Navbar />
+          <Routes>
+            <Route element={<HomePage /> }  path="/" exact/>
+            <Route element={<LoginPage />} path="/login" />
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
   );
 }
+
+
+
+// export default function App() {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+      
+//           <Route path="" element={<Chat />} />
+//           <Route path="login" element={<Login />} />
+    
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
