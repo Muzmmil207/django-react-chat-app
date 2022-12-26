@@ -22,18 +22,3 @@ export default function App() {
       </BrowserRouter>
   );
 }
-
-
-
-// export default function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-      
-//           <Route path="" element={<Chat />} />
-//           <Route path="login" element={<Login />} />
-    
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// }
