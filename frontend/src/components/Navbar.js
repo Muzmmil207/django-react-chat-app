@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 export function Navbar() {
-  let {user} = useContext(AuthContext)
+  let {user, logoutUser} = useContext(AuthContext)
+
   return (
     <>
     <Link to="/">Home</Link>
     <span>|</span>
     {user ? (
-      <p>Logout</p>
+      <p onClick={logoutUser} >Logout</p>
     ) : (
       <Link to="/login">Login</Link>
     )}
