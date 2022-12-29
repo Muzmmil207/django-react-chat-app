@@ -1,6 +1,6 @@
-from django.http import JsonResponse
-from rest_framework import filters, viewsets
-from rest_framework.decorators import api_view
+from chat.models import User
+from rest_framework import filters, generics, mixins, viewsets
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -24,10 +24,23 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(['GET'])
 def get_routes(request):
     routes = [
+        '/users'
         '/api/token',
         '/api/token/refresh',
     ]
     return Response(routes)
 
-class UserViewSet(viewsets.ModelViewSet):
-    ...
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def UserView(request):
+    users = User.objects.exclude(id=request.user.id)
+    serializers = UserSerializer(users, many=True)
+    return Response(serializers.data)
+
+# class UserView(generics.ListAPIView):
+#     """
+#     API endpoint that returns all users
+#     """
+#     queryset = User.objects.all()
+#     serializer_class= UserSerializer
+
