@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
         let response = await fetch('http://127.0.0.1:8000/api/token/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({'username': e.target.username.value, 'password': e.target.password.value})
         })
@@ -43,7 +43,6 @@ export const AuthProvider = ({children}) => {
     }
 
     let updateToken = async ()=>{
-        console.log('-----------------------------------------------')
         let response = await fetch('http://127.0.0.1:8000/api/token/refresh/', {
             method: 'POST',
             headers: {
@@ -64,6 +63,7 @@ export const AuthProvider = ({children}) => {
     }
 
     let contextData = {
+        authToken: authToken,
         user: user,
         loginUser: loginUser,
         logoutUser: logoutUser,
