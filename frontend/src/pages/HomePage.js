@@ -30,8 +30,8 @@ export function HomePage(){
             <>
             <div><p>you are log in</p></div>
             <div>
-                {usersData.map(user =>(
-                    <p><Link to={`/user/${user.id}`} >{user.username}</Link></p>
+                {usersData.map((user, idx) =>(
+                    <p key={idx}><Link to={`/chat/${user.id}`} >{user.username}</Link></p>
                 ))} 
                 
             </div>
