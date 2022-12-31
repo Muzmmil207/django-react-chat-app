@@ -4,10 +4,8 @@ import AuthContext from "../context/AuthContext";
 
 
 export  function Chat() {
-  const [welcomeMessage, setWelcomeMessage] = useState("");
   const [messageHistory, setMessageHistory] = useState([]);
   const [message, setMessage] = useState("");
-  const [name, setName] = useState("");
 
   let {user, authToken} = useContext(AuthContext)
   const log = location.href.split('/')
@@ -44,7 +42,8 @@ export  function Chat() {
       setMessageHistory(data)
   }
 
-  const { readyState, sendJsonMessage } = useWebSocket("ws://127.0.0.1:8000/", {
+  let channelName = [user.user_id, log[4]].sort().join('_')
+  const { readyState, sendJsonMessage } = useWebSocket(`ws://127.0.0.1:8000/${channelName}/`, {
     onOpen: () => {
       console.log("Connected!");
     },
@@ -52,20 +51,11 @@ export  function Chat() {
       console.log("Disconnected!");
     },
     // onMessage handler
-    // onMessage: (e) => {
-    //   const data = JSON.parse(e.data);
-    //   switch (data.type) {
-    //     case "welcome_message":
-    //       setWelcomeMessage(data.message);
-    //       break;
-    //     case "chat_message_echo":
-    //       setMessageHistory((prev) => prev.concat(data));
-    //       break;
-    //     default:
-    //       console.error("Unknown message type!");
-    //       break;
-    //   }
-    // }
+    onMessage: (e) => {
+      const data = JSON.parse(e.data);
+      getUsersMessage()
+      
+    }
   });
 
   const connectionStatus = {
@@ -85,16 +75,13 @@ export  function Chat() {
     sendJsonMessage({
       type: "chat_message",
       message,
-      name
     });
-    setName("");
     setMessage("");
   };
 
   return (
     <div>
       <span>The WebSocket is currently {connectionStatus}</span>
-      <p>{welcomeMessage}</p>
       <input
         name="message"
         placeholder="Message"
