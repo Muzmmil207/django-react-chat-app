@@ -1,4 +1,4 @@
-from chat.models import ChatGroup, Conversation, GroupMessage
+from apps.chat.models import ChatGroup, Conversation, GroupMessage
 from django.contrib.auth.models import User
 from rest_framework import serializers
 

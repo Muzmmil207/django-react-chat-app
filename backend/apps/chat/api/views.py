@@ -1,4 +1,4 @@
-from chat.models import Conversation, User
+from apps.chat.models import Conversation, User
 from django.db.models import Q
 from rest_framework import filters, generics, mixins, viewsets
 from rest_framework.decorators import api_view, permission_classes
@@ -45,7 +45,6 @@ def UserView(request):
 @permission_classes([IsAuthenticated])
 def UserMessageView(request, user_id):
     if request.method == 'POST':
-        print(request.data)
         data = request.data
         from_user = User.objects.get(id=data['from_user'])
         to_user = User.objects.get(id=data['to_user'])
@@ -54,7 +53,6 @@ def UserMessageView(request, user_id):
             to_user = to_user,
             content = data['content'],
         )
-        # return Response('data')
 
     users_message = Conversation.objects.filter(
         Q(from_user=request.user.id, to_user=user_id) |
