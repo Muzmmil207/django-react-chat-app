@@ -5,7 +5,7 @@ export default function RegisterPage() {
     let { registerUser } = useContext(AuthContext)
 
     return (
-        <div>
+        <div className="auth">
             <form onSubmit={registerUser}>
                 <input type="text" name="username" placeholder="Enter Username" />
                 <input type="password" name="password1" placeholder="Enter Password" />

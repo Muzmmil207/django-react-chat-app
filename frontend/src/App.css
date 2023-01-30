@@ -14,7 +14,7 @@
     --color-primary: #191d2b;
     --color-secondary: #27AE60;
     --color-white: #FFFFFF;
-    --color-black: #000;
+    --color-black: var(--color-secondary);
     --color-grey-0: #f8f8f8;
     --color-grey-1: #dbe1e8;
     --color-grey-2: #b2becd;
@@ -27,6 +27,10 @@
     --box-shadow-1: 0 3px 15px rgba(0, 0, 0, .2);
 }
 
+#root {
+    height: 100%;
+}
+
 a {
     display: inline-block;
     text-decoration: none;
@@ -35,10 +39,11 @@ a {
 
 body {
     height: 100vh;
+    background-color: var(--color-grey-5);
 }
 
 header {
-    background-color: black;
+    background-color: var(--color-grey-6);
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -74,4 +79,45 @@ header div {
 
 .menu:hover ul {
     display: block;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    padding: 30px 20px;
+}
+
+/* login & register */
+.auth {
+    background-color: #202328c8;
+    height: fit-content;
+    padding: 15px 10px;
+    box-shadow: var(--box-shadow-1);
+}
+
+.auth form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.auth form input {
+    width: 300px;
+    border: none;
+    outline: #27AE60;
+    margin: 5px 0;
+    padding-left: 5px;
+}
+
+.auth form input:last-child {
+    background-color: #454e56;
+    color: var(--color-secondary);
+    width: 50%;
+    border-radius: 5px;
+}
+
+.auth form input:last-child:hover {
+    background-color: var(--color-grey-0);
 }

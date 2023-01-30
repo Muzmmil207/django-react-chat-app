@@ -18,12 +18,14 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <Navbar />
-        <Routes>
-          <Route element={<HomePage />} path="/" exact />
-          <Route element={<Chat />} path="/chat/:id" exact />
-          <Route element={<LoginPage />} path="/login" />
-          <Route element={<RegisterPage />} path="/register" />
-        </Routes>
+        <main>
+          <Routes>
+            <Route element={<HomePage />} path="/" exact />
+            <Route element={<Chat />} path="/chat/:id" exact />
+            <Route element={<LoginPage />} path="/login" />
+            <Route element={<RegisterPage />} path="/register" />
+          </Routes>
+        </main>
       </AuthProvider>
     </BrowserRouter>
   );

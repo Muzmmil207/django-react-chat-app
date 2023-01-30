@@ -5,7 +5,7 @@ export function LoginPage() {
     let { loginUser } = useContext(AuthContext)
 
     return (
-        <div>
+        <div className="auth">
             <form onSubmit={loginUser}>
                 <input type="text" name="username" placeholder="Enter Username" />
                 <input type="text" name="password" placeholder="Enter Password" />
