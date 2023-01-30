@@ -10,19 +10,22 @@ export function Navbar() {
       <div className="home">
         <Link to="/">Home</Link>
       </div>
-      <nav className="home">
+      <nav className="menu">
+        <span><i class="bi bi-menu-app-fill"></i></span>
+
         {user ? (
-
-          <p onClick={logoutUser} >Logout</p>
+          <ul>
+            <li><Link onClick={logoutUser} >Logout</Link></li>
+          </ul>
         ) : (
-          <div className="auth">
-            <Link to="/register">regster</Link>
-            <Link to="/login">Login</Link>
-          </div>
+          <ul>
+            <li><Link to="/register">register</Link></li>
+            <li><Link to="/login">Login</Link></li>
+          </ul>
         )}
-      </nav>
 
-      {user && <p>Hello {user.id}</p>}
+
+      </nav>
     </header>
   );
 }
