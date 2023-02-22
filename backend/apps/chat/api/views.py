@@ -5,6 +5,7 @@ from rest_framework import filters, generics, mixins, viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -25,21 +26,20 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 @api_view(["GET"])
-def get_routes(request):
-    routes = [
-        "/api/users",
-        "/api/users-messages/<int>",
-        "/api/register/",
-        "/api/token",
-        "/api/token/refresh",
-    ]
-    return Response(routes)
+def get_routes(request, format=None):
+    return Response(
+        {
+            "users": reverse("user-view", request=request, format=format),
+            "token": reverse("token", request=request, format=format),
+            "refresh-token": reverse("refresh-token", request=request, format=format),
+        }
+    )
 
 
 @api_view(["POST"])
 def UserRegisterView(request):
     data = request.data
-    user = UserCreationForm(data)
+    user = UserSerializer(data)
 
     if User.objects.filter(username=data.get("username")).exists():
         return Response(
@@ -56,7 +56,7 @@ def UserRegisterView(request):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def UserView(request):
+def UserView(request, format=None):
     users = User.objects.exclude(id=request.user.id)
     serializers = UserSerializer(users, many=True)
     return Response(serializers.data)

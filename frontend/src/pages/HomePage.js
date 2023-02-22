@@ -1,17 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import { UsersNav } from "../components/UsersNav";
 
 
-export function HomePage(){
-    useEffect(()=>{
+export function HomePage() {
+    useEffect(() => {
         getUsers()
     }, [])
 
-    let {user, authToken} = useContext(AuthContext)
+    let { user, authToken } = useContext(AuthContext)
 
     let [usersData, setUsersData] = useState([])
-    let getUsers = async ()=>{
+    let getUsers = async () => {
         let response = await fetch('http://127.0.0.1:8000/api/users/', {
             method: 'GET',
             headers: {
@@ -23,21 +24,22 @@ export function HomePage(){
         setUsersData(data)
     }
 
-    if (!user){
-        return <Navigate replace to="/login"/>
-    } else{
+    if (!user) {
+        return <Navigate replace to="/login" />
+    } else {
         return (
             <>
-            <div><p>you are log in</p></div>
-            <div>
-                {usersData.map((user, idx) =>(
-                    <p key={idx}><Link to={`/chat/${user.id}`} >{user.username}</Link></p>
-                ))} 
-                
-            </div>
+                <UsersNav />
+                <Aside />
+                <div>
+                    {/* {usersData.map((user, idx) => (
+                        <p key={idx}><Link to={`/chat/${user.id}`} >{user.username}</Link></p>
+                    ))} */}
+
+                </div>
             </>
         )
     }
-  
+
 }
 

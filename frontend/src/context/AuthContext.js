@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        var fiveMinutes = 1000 * 60 * 5
+        var fiveMinutes = 1000 * 6 * 4
         let interval = setInterval(() => {
             if (authToken) {
                 updateToken()

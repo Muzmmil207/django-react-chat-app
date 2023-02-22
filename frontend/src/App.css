@@ -82,15 +82,22 @@ header div {
 }
 
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /*  */
     height: 90%;
     padding: 30px 20px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
 /* login & register */
 .auth {
+
     background-color: #202328c8;
     height: fit-content;
     padding: 15px 10px;
@@ -120,4 +127,41 @@ main {
 
 .auth form input:last-child:hover {
     background-color: var(--color-grey-0);
+}
+
+/* ; */
+.users {
+    width: 100%;
+    height: 100px;
+    background-color: #454e56;
+    padding: 10px 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-items: center;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: #12181b;
+    color: #f8f8f8;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, .2);
+    margin: 10px 20px;
+}
+
+.user a {
+    color: white;
+}
+
+.user:hover {
+    background-color: white;
+}
+
+.user:hover a {
+    color: #27AE60;
 }
